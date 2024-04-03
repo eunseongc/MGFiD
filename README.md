@@ -25,7 +25,7 @@ Please unzip it to the folder. The directory structure should be as follows: <br
 ```
 ├── MGFiD
 │   ├── src/
-│   └── open_domain_data/
+│   ├── open_domain_data/
 │   │   ├── nq/
 │   │   └── tqa/
 ```
