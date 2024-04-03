@@ -34,7 +34,8 @@ Please unzip it to the folder. The directory structure should be as follows: <br
 ## Checkpoints
 NQ: https://www.icloud.com/iclouddrive/04fVoGxOaOkwaibJXDMUJJiTA#nq%5Fmgfid <br>
 TQA: https://www.icloud.com/iclouddrive/0a6ga0K6TxRXZmXBblXxbOnsw#tqa%5Fmgfid <br>
-Evaluation Command
+
+Example evaluation commands
 ```
 ## For Natural Questions test (NQ test)
 source run_eval.sh checkpoints/nq_mgfid/checkpoint/best_dev/
