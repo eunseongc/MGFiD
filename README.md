@@ -31,8 +31,11 @@ Please unzip it to the folder. The directory structure should be as follows: <br
 ```
 
 ## Checkpoints
-NQ: <br>
-TQA: <br>
+NQ: https://www.icloud.com/iclouddrive/04fVoGxOaOkwaibJXDMUJJiTA#nq%5Fmgfid <br>
+TQA: https://www.icloud.com/iclouddrive/0a6ga0K6TxRXZmXBblXxbOnsw#tqa%5Fmgfid <br>
+
+
+
 ## Training 
 Run this script to train the MGFiD from scratch.<br>
 ```
