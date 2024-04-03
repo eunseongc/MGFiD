@@ -24,8 +24,8 @@ Data link: https://www.icloud.com/iclouddrive/051-FWmTlOqiBPhhsy7oU8TrQ#open%5Fd
 Please unzip it to the folder. The directory structure should be as follows: <br>
 ```
 ├── MGFiD
-│   ├── src/
 │   ├── checkpoints/
+│   ├── src/
 │   ├── open_domain_data/
 │   │   ├── nq/
 │   │   └── tqa/
