@@ -19,7 +19,7 @@ pip install torch==2.0.1 torchvision==0.15.2 torchaudio==2.0.2
 pip install transformers==4.29.2 sentence-transformers wandb numpy==1.23.5 kornia
 ```
 
-## Data Preparation
+## Data
 Data link: https://www.icloud.com/iclouddrive/051-FWmTlOqiBPhhsy7oU8TrQ#open%5Fdomain%5Fdata <br>
 Please unzip it to the folder. The directory structure is as follows: <br>
 ```
