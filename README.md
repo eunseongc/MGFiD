@@ -21,14 +21,18 @@ pip install transformers==4.29.2 sentence-transformers wandb numpy==1.23.5 korni
 
 ## Data
 Data link: https://www.icloud.com/iclouddrive/051-FWmTlOqiBPhhsy7oU8TrQ#open%5Fdomain%5Fdata <br>
-Please unzip it to the folder. The directory structure is as follows: <br>
+Please unzip it to the folder. The directory structure should be as follows: <br>
 ```
-MGFiD
-├── checkpoints/
-├── src/
-└── open_domain_data/
+├── MGFiD
+│   ├── src/
+│   ├── open_domain_data/
+│   │   ├── nq/
+│   │   └── tqa/
 ```
 
+## Checkpoints
+NQ: <br>
+TQA: <br>
 ## Training 
 Run this script to train the MGFiD from scratch.<br>
 ```
