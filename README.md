@@ -23,11 +23,11 @@ pip install transformers==4.29.2 sentence-transformers wandb numpy==1.23.5 korni
 Data link: https://www.icloud.com/iclouddrive/051-FWmTlOqiBPhhsy7oU8TrQ#open%5Fdomain%5Fdata <br>
 Please unzip it to the folder. The directory structure should be as follows: <br>
 ```
-MGFiD
-├── src/
-└── open_domain_data/
-  ├── nq/
-  └── tqa/
+├── MGFiD
+│   ├── src/
+│   └── open_domain_data/
+│   │   ├── nq/
+│   │   └── tqa/
 ```
 
 ## Training 
