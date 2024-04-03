@@ -31,7 +31,7 @@ Please unzip it to the folder. The directory structure should be as follows: <br
 │   │   └── tqa/
 ```
 
-## Checkpoints
+## Checkpoints & Inference
 NQ: https://www.icloud.com/iclouddrive/04fVoGxOaOkwaibJXDMUJJiTA#nq%5Fmgfid <br>
 TQA: https://www.icloud.com/iclouddrive/0a6ga0K6TxRXZmXBblXxbOnsw#tqa%5Fmgfid <br>
 
