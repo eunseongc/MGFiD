@@ -30,6 +30,9 @@ Please unzip it to the folder. The directory structure should be as follows: <br
 │   │   └── tqa/
 ```
 
+## Checkpoints
+NQ: <br>
+TQA: <br>
 ## Training 
 Run this script to train the MGFiD from scratch.<br>
 ```
