@@ -1,7 +1,7 @@
 # MGFiD (NAACL 2024 Findings)
 Hola!🙌 This is an official repository for our paper "Multi-Granularity Guided Fusion-in-Decoder" accepted in NAACL 2024 Findings. <br>
 
-Before running our code, we share our environments to train and infer with MGFiD. <br>
+Before running the code, we share our environments to train and infer with MGFiD. <br>
 ```
 CUDA version: 11.7
 Torch version: 2.0.1
@@ -31,7 +31,7 @@ Please unzip it to the folder. The directory structure should be as follows: <br
 │   │   └── tqa/
 ```
 
-## Checkpoints
+## Checkpoints & Inference
 NQ: https://www.icloud.com/iclouddrive/04fVoGxOaOkwaibJXDMUJJiTA#nq%5Fmgfid <br>
 TQA: https://www.icloud.com/iclouddrive/0a6ga0K6TxRXZmXBblXxbOnsw#tqa%5Fmgfid <br>
 
