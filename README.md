@@ -47,7 +47,7 @@ source run_eval.sh checkpoints/tqa_mgfid/checkpoint/best_dev/
 The expected results should be as follows:
 |         | NQ (test) | TQA (test) |
 |---------|-----------|------------|
-| MGFiD   | 49.9169   | 68.4699    |
+| MGFiD   | 49.9169   | 68.4611    |
 
 
 ## Training 
