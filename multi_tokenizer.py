@@ -125,7 +125,7 @@ def get_sentence_positions_using_nltk(qas, tok):
             first_token_sent_decode = tok.decode(first_token_sent)
             same_first_token = first_token_doc_decode == first_token_sent_decode
 
-            if last_token_doc_in_last_token_sent: ### "."    doc은 .에서 시작 sent는 "(2)에서 시작. 
+            if last_token_doc_in_last_token_sent:
                 if first_token_sent_decode == '':
                     diff = 1
                 elif first_token_sent_decode in first_token_doc_decode:
@@ -133,8 +133,8 @@ def get_sentence_positions_using_nltk(qas, tok):
                 else:
                     diff = -1
                 last_token_doc_in_last_token_sent = False
-            elif last_token_sent_in_last_token_doc: ## 일단 1 뺴고 시작
-                diff = 1  ## 일단 1 빼고 시작
+            elif last_token_sent_in_last_token_doc:
+                diff = 1
                 while True:
                     if diff >= sent_len:
                         skip_this_sent = True
@@ -155,10 +155,10 @@ def get_sentence_positions_using_nltk(qas, tok):
                     #     break
                     diff = diff + 1
                 last_token_sent_in_last_token_doc = False
-            elif not same_first_token: ## sentence로 나누니까 token이 달라짐. ". (19)"와 "(19)" 의 토큰이 다름.
+            elif not same_first_token:
                 if sent_len == 1:
                     skip_this_sent = True
-                elif first_token_doc_decode in first_token_sent_decode: ## sent: (19 doc: ( --> n 칸 더 가자
+                elif first_token_doc_decode in first_token_sent_decode:
                     if tok("_" + tok.decode(sent_tokens_))['input_ids'][2] == first_token_doc:
                         match = SequenceMatcher(None, sent_tokens_, context_input_ids[cur_len:cur_len+len(sent_tokens_)].tolist()).find_longest_match()
                         sent_exp_len = match.a
@@ -203,7 +203,6 @@ def get_sentence_positions_using_nltk(qas, tok):
                 if tok.decode(cur_last_token_sent) in tok.decode(cur_last_token_doc):
                     last_token_sent_in_last_token_doc = True
                 else:
-                    ## Sent가 포함할 수 도 있음.
                     if tok.decode(cur_last_token_doc) in tok.decode(cur_last_token_sent):
                         last_token_doc_in_last_token_sent = True
                     elif cur_last_token_doc == 535:

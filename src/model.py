@@ -392,9 +392,7 @@ class EncoderWrapper(nn.Module):
             if sentence_logits is not None: ## Which implies that sent_classifier is used
                 sentence_logits.view(bsz, n_passages, -1, 2)[not_selected_indices[0], not_selected_indices[1], :, 0] = 1e+10
         
-        if self.sce_mask_threshold > 0.0: ## 무조건 기존 attention_mask의 true를 false로 바꿔야함.
-            ## True --> False가 될 sentence를 골라서, false 화.
-            ## 문제는 문서에 문장이 하나도 남지 않는 경우. --> 모두 true로.. 해야해.
+        if self.sce_mask_threshold > 0.0:
             sentence_not_selected = sentence_probs < self.sce_mask_threshold ## sentences which will be masked are True
             sentence_not_selected[(sentence_not_selected.sum(1) == sentence_not_selected.shape[1]).nonzero()] = False
             ## select True which will be maksed
@@ -487,17 +485,6 @@ class EncoderWrapper(nn.Module):
             # Update hidden states
             hidden_states = hidden_states + self.sent_highlight_emb(mask.to(hidden_states.device))
 
-        hlatr_loss = 0
-        # > HLATR
-        ## =============================== ##
-        # hlatr_input = pooled_output.view(bsz, n_passages, -1)
-        # hlatr_attention_mask = torch.ones((bsz, n_passages), device=hlatr_input.device)
-        # hlatr_attention_mask = self.get_extended_attention_mask(hlatr_attention_mask, hlatr_input.shape)
-        # hlatr_loss, hlatr_hidden_states, hlatr_logits = self.HLATR(hlatr_input, hlatr_attention_mask, has_answers)
-        # probs = nn.functional.softmax(hlatr_logits, dim=1)
-        ## =============================== ##
-
-        ## > Select N hidden states to be used for decoding
         ## =============================== ##
         if self.reduced_n > 0 :
             topN_indices = probs.argsort(dim=-1, descending=True)[:, :self.reduced_n]

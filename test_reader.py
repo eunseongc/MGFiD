@@ -49,11 +49,8 @@ def evaluate(model, dataset, dataloader, tokenizer, opt):
     num_passages_in_decoder = []
 
     if opt.write_results:
-        # write_path = Path(opt.checkpoint_dir) / opt.name / 'test_results'
         fw = open(f'outputs/{opt.n_contexts}_group{opt.eval_group}_{opt.select_gold_context}.txt', 'wt')
         print(f'Writing results to outputs/{opt.n_contexts}_group{opt.eval_group}_{opt.select_gold_context}.txt', 'wt')
-        # fw = open(write_path / f'{opt.n_contexts}_group{opt.eval_group}_{opt.select_gold_context}.txt', 'a')
-        # print(f'Writing results to {write_path / f"{opt.n_contexts}_group{opt.eval_group}_{opt.select_gold_context}.txt"}')
 
 
     if opt.eval_group == 'G':
@@ -82,33 +79,11 @@ def evaluate(model, dataset, dataloader, tokenizer, opt):
                         ctx_id_list.append(ctx_id)
                         break
 
-                # new_context_ids = context_ids[0, ctx_id_list]
-                # context_ids = new_context_ids.view(1, len(ctx_id_list), -1)
-                # new_context_mask = context_mask[0, ctx_id_list]
-                # context_mask = new_context_mask.view(1, len(ctx_id_list), -1)
-
                 new_rank_1 = context_ids[0, ctx_id]
                 context_ids = new_rank_1.view(1, 1, -1)
                 new_rank_1_mask = context_mask[0, ctx_id]
                 context_mask = new_rank_1_mask.view(1, 1, -1)
                 
-            ####### Check if the answer is in the n contexts ########
-            # example = dataset.data[idx[0]]
-            # flag = False
-            # answers = example['answers']
-            # for ctx_id, ctx in enumerate(example['ctxs'][:opt.n_contexts]):
-            #     if src.evaluation.has_answer(answers, ctx['title'] + ' ' + ctx['text'], simple_tokenizer):
-            #         flag = True
-            #         break
-            # if not flag:
-            #     print(f'{i}-th qas has no answer in the {opt.n_contexts} contexts')
-            #     continue
-            # answer_contain_i_list.append(i)
-
-            # new_rank_1 = context_ids[0, ctx_id]
-            # context_ids = new_rank_1.view(1, 1, -1)
-            # new_rank_1_mask = context_mask[0, ctx_id]
-            # context_mask = new_rank_1_mask.view(1, 1, -1)
             outputs = model.generate(input_ids=context_ids.cuda(),
                                      attention_mask=context_mask.cuda(),
                                      max_length=50,
@@ -127,9 +102,6 @@ def evaluate(model, dataset, dataloader, tokenizer, opt):
                         for s_i, label in enumerate(has_answers_sent_ctx):
                             sent_has_answer_preds.append(sentence_preds[e_i, c_i, s_i].item())
                             sent_has_answer_labels.append(label)
-
-                        # if torch.sum(sentence_preds[e_i, c_i, s_i+1:]) != 0:
-                        #     print('\n\n\n########################### wrong #############################\n\n')
 
             answer_array = has_answers.numpy()
             scores_array = probs.cpu().numpy()
@@ -155,8 +127,6 @@ def evaluate(model, dataset, dataloader, tokenizer, opt):
                 if 'answers' in example:
                     score = src.evaluation.ems(ans, example['answers'])
                     exactmatch.append(score)
-                    # if b_i in answer_contain_i_list_1:
-                    #     exactmatch_G2.append(score)
                 answers = example['answers']
                 has_answer = check_has_answer(answers, example['ctxs'][:opt.n_contexts], simple_tokenizer)
                 recall.append(has_answer)
@@ -176,11 +146,9 @@ def evaluate(model, dataset, dataloader, tokenizer, opt):
                     log += '| no answer to compute scores'
                 else:
                     log += f' | average = {np.mean(exactmatch):.3f}'
-                    # log += f' | average (G-2) = {np.mean(exactmatch_G2):.3f}'
 
                 logger.warning(log)
 
-    # logger.warning(f'Average group length, target = {np.mean(group_len):.2f}, {np.mean(len_target_group):.2f}')
     logger.warning(f'Process rank:{opt.global_rank}, total {total} | EM = {100 * np.mean(exactmatch):.2f}')
     if opt.write_results:
         fw.close()
@@ -210,7 +178,6 @@ def evaluate(model, dataset, dataloader, tokenizer, opt):
         preds['Sent. AUC'] = auc
         preds['Sent. Acc.'] = acc
 
-        ## Select only positive sentences to evaluate
         true_indices_labels = np.where(sent_has_answer_labels == 1)[0]
         sent_has_answer_labels_1 = sent_has_answer_labels[true_indices_labels]
         sent_has_answer_preds_1 = sent_has_answer_preds[true_indices_labels]
@@ -297,10 +264,6 @@ if __name__ == "__main__":
         collate_fn=collator_function
     )
     
-    # t5 = transformers.T5ForConditionalGeneration.from_pretrained('t5-base')
-    # model = src.model.FiDT5(t5.config, opt)
-    # model.load_t5(t5.state_dict())
-    
     model_class = src.model.FiDT5
     model = model_class.from_pretrained(opt.model_path, opt)
     model = model.to(opt.device)
@@ -310,8 +273,6 @@ if __name__ == "__main__":
 
     logger.info(f'EM {100*exactmatch:.2f}, Total number of example {total}')
 
-    # recall_dict = {f'Recall{k}':100 * np.mean(v) for k, v in recall_dict.items()}
-    # preds = {f'Recall{k}':100 * np.mean(v) for k, v in preds.items()}
     evaluation_table = ResultTable(table_name='Eval Result', header=list(preds.keys()))
     evaluation_table.add_row('orig.', recall_dict)
     evaluation_table.add_row('pred.', preds)

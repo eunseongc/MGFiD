@@ -142,9 +142,6 @@ def train(model, optimizer, scheduler, checkpoint_step, train_dataset, eval_data
 
                     log = f"{step} / {opt.total_steps} |"
                     log += f"train loss: {curr_loss/opt.eval_freq:.3f} |"
-                    # log += f"evaluation (EM): {100*dev_em:.2f} |"
-                    # log += f"Recall@1: {100 * np.mean(recalls[0]):.2f} |Recall@5: {100 * np.mean(recalls[1]):.2f} |"
-                    # log += f"Pred Recall@1: {100 * np.mean(recalls[2]):.2f} |Pred Recall@5: {100 * np.mean(recalls[3]):.2f} |"
                     log += f"lr: {scheduler.get_last_lr()[0]:.5f}"
                     logger.info(log)
                     logger.info(evaluation_table.to_string())
@@ -317,7 +314,7 @@ if __name__ == "__main__":
         model = model_class(t5.config, opt) 
         # t5 = transformers.T5ForConditionalGeneration.from_pretrained(model_name)
         # model = src.model.FiDT5(t5.config, opt)
-        if opt.enc_weight_path is not None: ## T5를 바꿔버리는 거니까 된다된다..!
+        if opt.enc_weight_path is not None:
             logger.info(f"Loading encoder weights from {opt.enc_weight_path}")
             t5.load_state_dict(torch.load(opt.enc_weight_path), strict=False)
         model.load_t5(t5.state_dict())
