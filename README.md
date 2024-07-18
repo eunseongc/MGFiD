@@ -55,3 +55,40 @@ Run this script to train the MGFiD from scratch.<br>
 ```
 source run.sh
 ```
+
+
+
+
+## Citation
+Please cite our paper:
+```
+@inproceedings{ChoiLCKSL22,
+  author    = {Eunseong Choi and
+               Sunkyung Lee and
+               Minjin Choi and
+               Hyeseon Ko and
+               Young{-}In Song and
+               Jongwuk Lee},
+  title     = {SpaDE: Improving Sparse Representations using a Dual Document Encoder
+               for First-stage Retrieval},
+  booktitle = {Proceedings of the 31st {ACM} International Conference on Information
+               {\&} Knowledge Management, Atlanta, GA, USA, October 17-21, 2022},
+  pages     = {272--282},
+  publisher = {{ACM}},
+  year      = {2022},
+}
+
+@inproceedings{choi-etal-2024-multi,
+    title = "Multi-Granularity Guided Fusion-in-Decoder",
+    author = "Choi, Eunseong  and
+      Lee, Hyeri  and
+      Lee, Jongwuk",
+    booktitle = "Findings of the Association for Computational Linguistics: NAACL 2024",
+    year = "2024",
+    publisher = "Association for Computational Linguistics",
+    url = "https://aclanthology.org/2024.findings-naacl.142",
+    pages = "2201--2212",
+}
+
+```
+
