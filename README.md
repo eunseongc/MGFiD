@@ -66,7 +66,7 @@ Please cite our paper:
     author = {Eunseong Choi and
               Hyeri Lee and
               Jongwuk Lee},
-    title = "Multi-Granularity Guided Fusion-in-Decoder",
+    title = {Multi-Granularity Guided Fusion-in-Decoder},
     booktitle = {Findings of the Association for Computational Linguistics: NAACL 2024},
     pages = {2201--2212},
     publisher = {Association for Computational Linguistics},
