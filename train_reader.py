@@ -27,7 +27,7 @@ from torch.nn import CrossEntropyLoss
 import torch.nn.functional as F
 
 import wandb
-os.environ['WANDB_API_KEY'] = "01e2c25c291441f9d7a138a24249bd2b5e39eb8f"
+os.environ['WANDB_API_KEY'] = None
 
 from sklearn import metrics
 
